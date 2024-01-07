@@ -54,6 +54,7 @@
 - [ImmortalWrt](https://github.com/immortalwrt/immortalwrt)
 - [hanwckf/immortalwrt-mt798x](https://github.com/hanwckf/immortalwrt-mt798x)
 - [lgs2007m/immortalwrt-mt798x-rax3000m-emmc](https://github.com/lgs2007m/immortalwrt-mt798x-rax3000m-emmc)
+- [VIKINGYFY/OpenWRT](https://github.com/VIKINGYFY/OpenWRT-CI.git)
 - [GL-iNet](https://github.com/gl-inet)
 - [padavanonly](https://github.com/padavanonly)
 - [Microsoft Azure](https://azure.microsoft.com)
