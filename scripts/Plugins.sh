@@ -11,69 +11,70 @@ UPDATE_PACKAGE() {
 	local PKG_REPO=$2
 	local PKG_BRANCH=$3
 	local PKG_SPECIAL=$4
-	local REPO_NAME=$(echo $PKG_REPO | cut -d '/' -f 2)
-
+	local REPO_NAME=$(echo $PKG_REPO | rev | cut -d'/' -f 1 | rev)
+	
 	rm -rf $(find ../feeds/luci/ -type d -iname "*$PKG_NAME*" -prune)
-
+    
 	git clone --depth=1 --single-branch --branch $PKG_BRANCH $PKG_REPO
-
-	if [[ $PKG_SPECIAL == "pkg" ]]; then
-		cp -rf $(find ./$REPO_NAME/ -type d -iname "*$PKG_NAME*" -prune) ./
-		rm -rf ./$REPO_NAME
-	elif [[ $PKG_SPECIAL == "name" ]]; then
+    echo "PKG_NAME=$PKG_NAME"
+    if [[ $PKG_SPECIAL == "name" ]]; then
 		mv -f $REPO_NAME $PKG_NAME
 	fi
 }
+###仓库单独拉一个文件夹 替代SVN
+# $1=被拉文件夹路径  $2=仓库地址 $3=BRANCH
+SVN_PACKAGE() {
+	local PKG_PATH=$1
+	local PKG_REPO=$2
+	local PKG_BRANCH=$3
+	local REPO_NAME=$(echo $PKG_REPO | rev | cut -d'/' -f 1 | rev)
+	local SVN_NAME=$(echo $PKG_PATH | rev | cut -d'/' -f 1 | rev)
+	
+	git clone --depth=1 --single-branch --branch $PKG_BRANCH $PKG_REPO
+    echo "SVN_NAME=$SVN_NAME"
+	mv $REPO_NAME/$PKG_PATH ./svn-package/
+    rm -rf $REPO_NAME
+}
+rm -rf ./svn-package; mkdir ./svn-package
+
+SVN_PACKAGE "openwrt/aliyundrive-webdav" "https://github.com/messense/aliyundrive-webdav" "main"
+SVN_PACKAGE "openwrt/luci-app-aliyundrive-webdav" "https://github.com/messense/aliyundrive-webdav" "main"
 
 UPDATE_PACKAGE "tinyfilemanager" "https://github.com/muink/luci-app-tinyfilemanager" "master"
-
 UPDATE_PACKAGE "design" "https://github.com/gngpp/luci-theme-design" "$([[ $REPO_URL == *"lede"* ]] && echo "main" || echo "js")"
 UPDATE_PACKAGE "design-config" "https://github.com/gngpp/luci-app-design-config" "master"
 UPDATE_PACKAGE "argon" "https://github.com/jerrykuku/luci-theme-argon" "$([[ $REPO_URL == *"lede"* ]] && echo "18.06" || echo "master")"
 UPDATE_PACKAGE "argon-config" "https://github.com/jerrykuku/luci-app-argon-config" "$([[ $REPO_URL == *"lede"* ]] && echo "18.06" || echo "master")"
 UPDATE_PACKAGE "luci-theme-kucat" "https://github.com/dsadaskwq/luci-theme-kucat.git" "$([[ $REPO_URL == *"lede"* ]] && echo "main" || echo "js")"
 UPDATE_PACKAGE "luci-app-advancedplus" "https://github.com/sirpdboy/luci-app-advancedplus.git" "main"
-
 UPDATE_PACKAGE "passwall" "https://github.com/xiaorouji/openwrt-passwall" "main"
 UPDATE_PACKAGE "passwall2" "https://github.com/xiaorouji/openwrt-passwall2" "main"
 UPDATE_PACKAGE "passwall-packages" "https://github.com/xiaorouji/openwrt-passwall-packages" "main"
 UPDATE_PACKAGE "helloworld" "https://github.com/fw876/helloworld" "master"
 UPDATE_PACKAGE "openclash" "https://github.com/vernesong/OpenClash" "master"
-
 UPDATE_PACKAGE "alist" "https://github.com/sbwml/luci-app-alist.git" "master"
 UPDATE_PACKAGE "adguardhome" "https://github.com/chenmozhijin/luci-app-adguardhome.git" "master"
 UPDATE_PACKAGE "dockerman" "https://github.com/lisaac/luci-app-dockerman.git" "master"
 UPDATE_PACKAGE "mosdns" "https://github.com/sbwml/luci-app-mosdns.git" "v5"
 UPDATE_PACKAGE "lucky" "https://github.com/gdy666/luci-app-lucky.git" "main"
+UPDATE_PACKAGE "luci-app-mwan3helper-chinaroute" "https://github.com/padavanonly/luci-app-mwan3helper-chinaroute.git" "main"
 
-##添加软件包
-#git clone --depth=1 --single-branch --branch "main" https://github.com/linkease/istore.git
-#git clone --depth=1 --single-branch https://github.com/linkease/nas-packages.git
-#git clone --depth=1 --single-branch https://github.com/linkease/nas-packages-luci.git
-
-git clone --depth=1 --single-branch --branch "main" https://github.com/padavanonly/luci-app-mwan3helper-chinaroute.git
-##插件库单独拉一个插件
-svn export https://github.com/haiibo/packages/trunk/luci-app-onliner ./luci-app-onliner      
-svn export https://github.com/messense/aliyundrive-webdav/trunk/openwrt/aliyundrive-webdav ./aliyundrive-webdav
-svn export https://github.com/messense/aliyundrive-webdav/trunk/openwrt/luci-app-aliyundrive-webdav ./luci-app-aliyundrive-webdav
-  
 ##根据源码修改 21.02  删除/更新 指定路径冲突插件或者核心
 if [[ $REPO_URL == *"immortalwrt-mt798x"* ]] ; then 
-  cd ..
   
   #更新golang 
-  rm -rf feeds/packages/lang/golang
-  git clone https://github.com/sbwml/packages_lang_golang -b 21.x ./feeds/packages/lang/golang
+  rm -rf ../feeds/packages/lang/golang
+  git clone https://github.com/sbwml/packages_lang_golang -b 21.x ../feeds/packages/lang/golang
   #更新adblock广告过滤
-  #rm -rf feeds/packages/net/adblock
-  #rm -rf feeds/luci/applications/luci-app-adblock
-  #svn export https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-adblock ./feeds/luci/applications/luci-app-adblock
-  #svn export https://github.com/coolsnowwolf/packages/trunk/net/adblock ./feeds/packages/net/adblock
+  #SVN_PACKAGE "applications/luci-app-adblock" "https://github.com/coolsnowwolf/luci" "master"
+  #SVN_PACKAGE "net/adblock" "https://github.com/coolsnowwolf/packages" "master"
+  #mv svn-package/luci-app-adblock ../feeds/luci/applications/luci-app-adblock
+  #mv svn-package/adblock ../feeds/packages/net/adblock
   #更新tailscale
-  #rm -rf feeds/packages/net/tailscale
-  #svn export https://github.com/immortalwrt/packages/trunk/net/tailscale ./feeds/packages/net/tailscale
-
-  cd package
+  #rm -rf ../feeds/packages/net/tailscale
+  #svn export https://github.com/immortalwrt/packages/trunk/net/tailscale ../feeds/packages/net/tailscale
+  #SVN_PACKAGE "net/tailscale" "https://github.com/immortalwrt/packages" "master"
+  #mv svn-package/tailscale ../feeds/packages/net/tailscale
 fi
 
 
