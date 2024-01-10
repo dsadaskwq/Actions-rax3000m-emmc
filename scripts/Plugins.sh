@@ -16,10 +16,10 @@ UPDATE_PACKAGE() {
 	rm -rf $(find ../feeds/luci/ -type d -iname "*$PKG_NAME*" -prune)
     
 	git clone --depth=1 --single-branch --branch $PKG_BRANCH $PKG_REPO
-    echo "PKG_NAME=$PKG_NAME"
-    if [[ $PKG_SPECIAL == "name" ]]; then
+        echo "PKG_NAME=$PKG_NAME"
+        if [[ $PKG_SPECIAL == "name" ]]; then
 		mv -f $REPO_NAME $PKG_NAME
-	fi
+        fi
 }
 ###仓库单独拉一个文件夹 替代SVN
 # $1=被拉文件夹路径  $2=仓库地址 $3=BRANCH
@@ -31,11 +31,10 @@ SVN_PACKAGE() {
 	local SVN_NAME=$(echo $PKG_PATH | rev | cut -d'/' -f 1 | rev)
 	
 	git clone --depth=1 --single-branch --branch $PKG_BRANCH $PKG_REPO
-    echo "SVN_NAME=$SVN_NAME"
-	mv $REPO_NAME/$PKG_PATH ./svn-package/
-    rm -rf $REPO_NAME
+        echo "SVN_NAME=$SVN_NAME"
+	mv $REPO_NAME/$PKG_PATH ./
+        rm -rf $REPO_NAME
 }
-rm -rf ./svn-package; mkdir ./svn-package
 
 SVN_PACKAGE "openwrt/aliyundrive-webdav" "https://github.com/messense/aliyundrive-webdav" "main"
 SVN_PACKAGE "openwrt/luci-app-aliyundrive-webdav" "https://github.com/messense/aliyundrive-webdav" "main"
