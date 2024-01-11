@@ -32,9 +32,10 @@ SVN_PACKAGE() {
 	
 	git clone --depth=1 --single-branch --branch $PKG_BRANCH $PKG_REPO
         echo "SVN_NAME=$SVN_NAME"
-	mv $REPO_NAME/$PKG_PATH ./
+	mv $REPO_NAME/$PKG_PATH ./svn-package/
         rm -rf $REPO_NAME
 }
+rm -rf ./svn-package; mkdir ./svn-package
 
 SVN_PACKAGE "openwrt/aliyundrive-webdav" "https://github.com/messense/aliyundrive-webdav" "main"
 SVN_PACKAGE "openwrt/luci-app-aliyundrive-webdav" "https://github.com/messense/aliyundrive-webdav" "main"
