@@ -97,8 +97,8 @@ if [[ $USE_IPK == "true" ]] ; then
     sed -i 's/services/status/g' ./feeds/luci/luci-app-nlbwmon/root/usr/share/luci/menu.d/luci-app-nlbwmon.json
     sed -i 's/network/status/g' ./mtk/applications/luci-app-wrtbwmon/root/usr/share/luci/menu.d/luci-app-wrtbwmon.json
     #部分插件调整到nas 网络储存
-    sed -i 's/services/nas/g' ./luci-app-aliyundrive-webdav/luasrc/controller/*.lua
-    sed -i 's/services/nas/g' ./luci-app-aliyundrive-webdav/luasrc/view/aliyundrive-webdav/*.htm
+    sed -i 's/services/nas/g' ./svn-package/luci-app-aliyundrive-webdav/luasrc/controller/*.lua
+    sed -i 's/services/nas/g' ./svn-package/luci-app-aliyundrive-webdav/luasrc/view/aliyundrive-webdav/*.htm
 
     sed -i 's/services/nas/g' ./feeds/luci/luci-app-wol/root/usr/share/luci/menu.d/luci-app-wol.json
 
