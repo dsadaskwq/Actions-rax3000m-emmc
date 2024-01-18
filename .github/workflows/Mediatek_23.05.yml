@@ -16,10 +16,14 @@ permissions: write-all
 on:
   workflow_dispatch:
     inputs:
+      USE_WIFI:
+        description: '修改默认WIFI名'
+        required: true
+        default: 'Mediatek'
       Default_eeprom:
         description: 'eeprom文件 360t7/nx30pro'
         required: true
-        default: '360t7' 
+        default: '360t7'         
       USE_EEPROM:
         description: '使用 上面 高功率eeprom'
         required: true
@@ -48,6 +52,7 @@ env:
   UPLOAD_FIRMWARE: false
   UPLOAD_RELEASE: true
   Default_eeprom: ${{inputs.Default_eeprom}}
+  USE_WIFI: ${{inputs.USE_WIFI}}
   TZ: Asia/Shanghai
 
 jobs:
