@@ -91,6 +91,7 @@ fi
 
 ##根据源码修改 23.05 Home Proxy
 if [[ $REPO_URL == *"immortalwrt/immortalwrt"* ]] ; then
+  rm -rf ../feeds/luci/applications/luci-app-homeproxy
   git clone --depth=1 --single-branch --branch "dev" https://github.com/immortalwrt/homeproxy.git
 fi
 
