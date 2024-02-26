@@ -29,13 +29,14 @@ on:
         required: true
         default: 'Mediatek'
       Default_eeprom:
-        description: 'eeprom文件 360t7/nx30pro'
+        description: 'eeprom文件 360t7/nx30pro'  #off不使用高功率eeprom
         required: true
         default: '360t7' 
         type: choice
         options:
         - 360t7
         - nx30pro
+        - off
       USE_EEPROM:
         description: '使用 上面 高功率eeprom'
         required: true
@@ -161,7 +162,7 @@ jobs:
         sed -i 's/CONFIG_PACKAGE_lua-cjson=y/CONFIG_WIFI_NORMAL_SETTING=y/g' .config
 
     - name: 设置 高功率 eeprom
-      if: github.event.inputs.USE_EEPROM == 'true'
+      if: github.event.inputs.Default_eeprom != 'off'
       run: |
         cp eeprom/"$Default_eeprom"_eeprom.bin openwrt/package/mtk/drivers/mt_wifi/files/mt7981-default-eeprom/MT7981_iPAiLNA_EEPROM.bin
         cd openwrt
