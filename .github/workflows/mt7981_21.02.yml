@@ -116,6 +116,7 @@ jobs:
     - name: 检查空间使用情况
       if: (!cancelled())
       run: |
+          echo "$Default_eeprom"
           echo "======================="
           lscpu | egrep "name|Core|Thread"
           echo "======================="
