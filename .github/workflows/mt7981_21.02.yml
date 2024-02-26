@@ -29,14 +29,14 @@ on:
         required: true
         default: 'Mediatek'
       Default_eeprom:
-        description: 'eeprom文件 360t7/nx30pro'  #off不使用高功率eeprom
+        description: 'eeprom文件 360t7/nx30pro/off'  #off不使用高功率eeprom
         required: true
-        default: '360t7' 
+        default: '360t7_eeprom' 
         type: choice
         options:
-        - 360t7
-        - nx30pro
-        - off_
+        - 360t7_eeprom
+        - nx30pro_eeprom
+        - off_false
       USE_EEPROM:
         description: '使用 上面 高功率eeprom'
         required: true
@@ -163,9 +163,9 @@ jobs:
         sed -i 's/CONFIG_PACKAGE_lua-cjson=y/CONFIG_WIFI_NORMAL_SETTING=y/g' .config
 
     - name: 设置 高功率 eeprom
-      if: github.event.inputs.Default_eeprom != 'off_'
+      if: github.event.inputs.Default_eeprom == '_eeprom'
       run: |
-        cp eeprom/"$Default_eeprom"_eeprom.bin openwrt/package/mtk/drivers/mt_wifi/files/mt7981-default-eeprom/MT7981_iPAiLNA_EEPROM.bin
+        cp eeprom/"$Default_eeprom".bin openwrt/package/mtk/drivers/mt_wifi/files/mt7981-default-eeprom/MT7981_iPAiLNA_EEPROM.bin
         cd openwrt
         ## 如果MAC没有修复则单独固定WiFi MAC
         if sed -n '/rax3000m/,/;;/p' target/linux/mediatek/mt7981/base-files/etc/board.d/02_network | grep -q 'lan_mac=$(mmc_get_mac_binary factory 0x24)'; then
@@ -268,7 +268,7 @@ jobs:
           wlan_luci_interface="luci-app-mtk"
         fi
         eeprom_status=""
-        if [ -e openwrt/package/mtk/drivers/mt_wifi/files/mt7981-default-eeprom/MT7981_iPAiLNA_EEPROM.bin ] ; then
+        if [[ "${{ env.Default_eeprom }}" == '_eeprom' ]]; then
           echo "- eeprom 使用 "$Default_eeprom" 提取版本" >> release.txt
           eeprom_status="$Default_eeprom""_eeprom"
         else
