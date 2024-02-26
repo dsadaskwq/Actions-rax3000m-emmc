@@ -20,6 +20,10 @@ on:
         description: '源码 hanwckf/padavanonly'
         required: true
         default: 'padavanonly'
+        type: choice
+        options:
+        - hanwckf
+        - padavanonly
       USE_WIFI:
         description: '修改默认WIFI名'
         required: true
@@ -28,6 +32,10 @@ on:
         description: 'eeprom文件 360t7/nx30pro'
         required: true
         default: '360t7' 
+        type: choice
+        options:
+        - 360t7
+        - nx30pro
       USE_EEPROM:
         description: '使用 上面 高功率eeprom'
         required: true
