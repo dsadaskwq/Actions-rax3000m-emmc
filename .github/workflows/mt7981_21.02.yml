@@ -208,10 +208,10 @@ jobs:
     - name: 编译固件中
       id: compile
       run: |
-        cd openwrt
-        echo -e "$(($(nproc)+1)) thread compile"
-        make -j$(($(nproc)+1)) || make -j$(nproc) || make -j1 V=s
-        echo "status=success" >> $GITHUB_OUTPUT
+       # cd openwrt
+       # echo -e "$(($(nproc)+1)) thread compile"
+       # make -j$(($(nproc)+1)) || make -j$(nproc) || make -j1 V=s
+       # echo "status=success" >> $GITHUB_OUTPUT
 
     - name: 空间使用情况
       if: (!cancelled())
