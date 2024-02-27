@@ -17,30 +17,26 @@ on:
   workflow_dispatch:
     inputs:
       USE_URL:
-        description: '源码 hanwckf/padavanonly'
+        description: '使用源码 hanwckf/padavanonly'
         required: true
         default: 'padavanonly'
         type: choice
         options:
         - hanwckf
         - padavanonly
+      Default_eeprom:
+        description: 'eeprom文件 360t7/nx30pro/off'  #off不使用高功率eeprom
+        required: true
+        default: '360t7_eeprom' 
+        type: choice
+        options:
+        - 360t7_eeprom
+        - nx30pro_eeprom
+        - off_false
       USE_WIFI:
         description: '修改默认WIFI名'
         required: true
         default: 'Mediatek'
-      Default_eeprom:
-        description: 'eeprom文件 360t7/nx30pro'
-        required: true
-        default: '360t7' 
-        type: choice
-        options:
-        - 360t7
-        - nx30pro
-      USE_EEPROM:
-        description: '使用 上面 高功率eeprom'
-        required: true
-        default: true
-        type: boolean  
       USE_MTWIFI_CFG:
         description: '使用 Openwrt原生无线界面'
         required: true
@@ -161,9 +157,9 @@ jobs:
         sed -i 's/CONFIG_PACKAGE_lua-cjson=y/CONFIG_WIFI_NORMAL_SETTING=y/g' .config
 
     - name: 设置 高功率 eeprom
-      if: github.event.inputs.USE_EEPROM == 'true'
+      if: github.event.inputs.Default_eeprom != 'off_false'
       run: |
-        cp eeprom/"$Default_eeprom"_eeprom.bin openwrt/package/mtk/drivers/mt_wifi/files/mt7981-default-eeprom/MT7981_iPAiLNA_EEPROM.bin
+        cp eeprom/"$Default_eeprom".bin openwrt/package/mtk/drivers/mt_wifi/files/mt7981-default-eeprom/MT7981_iPAiLNA_EEPROM.bin
         cd openwrt
         ## 如果MAC没有修复则单独固定WiFi MAC
         if sed -n '/rax3000m/,/;;/p' target/linux/mediatek/mt7981/base-files/etc/board.d/02_network | grep -q 'lan_mac=$(mmc_get_mac_binary factory 0x24)'; then
@@ -266,7 +262,7 @@ jobs:
           wlan_luci_interface="luci-app-mtk"
         fi
         eeprom_status=""
-        if [ -e openwrt/package/mtk/drivers/mt_wifi/files/mt7981-default-eeprom/MT7981_iPAiLNA_EEPROM.bin ] ; then
+        if [[ "${{inputs.Default_eeprom}}" == *"_eeprom" ]]; then
           echo "- eeprom 使用 "$Default_eeprom" 提取版本" >> release.txt
           eeprom_status="$Default_eeprom""_eeprom"
         else
