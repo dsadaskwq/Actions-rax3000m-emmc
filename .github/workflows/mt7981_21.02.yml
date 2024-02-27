@@ -17,17 +17,13 @@ on:
   workflow_dispatch:
     inputs:
       USE_URL:
-        description: '源码 hanwckf/padavanonly'
+        description: '使用源码 hanwckf/padavanonly'
         required: true
         default: 'padavanonly'
         type: choice
         options:
         - hanwckf
         - padavanonly
-      USE_WIFI:
-        description: '修改默认WIFI名'
-        required: true
-        default: 'Mediatek'
       Default_eeprom:
         description: 'eeprom文件 360t7/nx30pro/off'  #off不使用高功率eeprom
         required: true
@@ -37,11 +33,10 @@ on:
         - 360t7_eeprom
         - nx30pro_eeprom
         - off_false
-      USE_EEPROM:
-        description: '使用 上面 高功率eeprom'
+      USE_WIFI:
+        description: '修改默认WIFI名'
         required: true
-        default: true
-        type: boolean  
+        default: 'Mediatek'
       USE_MTWIFI_CFG:
         description: '使用 Openwrt原生无线界面'
         required: true
@@ -116,7 +111,6 @@ jobs:
     - name: 检查空间使用情况
       if: (!cancelled())
       run: |
-          echo "$Default_eeprom"
           echo "======================="
           lscpu | egrep "name|Core|Thread"
           echo "======================="
