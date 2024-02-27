@@ -268,7 +268,7 @@ jobs:
           wlan_luci_interface="luci-app-mtk"
         fi
         eeprom_status=""
-        if [[ "${{inputs.Default_eeprom}}" == '_eeprom' ]]; then
+        if [[ "${{inputs.Default_eeprom}}" == *"_eeprom" ]]; then
           echo "- eeprom 使用 "$Default_eeprom" 提取版本" >> release.txt
           eeprom_status="$Default_eeprom""_eeprom"
         else
