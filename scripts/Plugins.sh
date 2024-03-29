@@ -55,7 +55,7 @@ UPDATE_PACKAGE "https://github.com/gngpp/luci-theme-design" "$([[ $REPO_URL == *
 UPDATE_PACKAGE "https://github.com/gngpp/luci-app-design-config" "master"
 UPDATE_PACKAGE "https://github.com/jerrykuku/luci-theme-argon" "$([[ $REPO_URL == *"lede"* ]] && echo "18.06" || echo "master")"
 UPDATE_PACKAGE "https://github.com/jerrykuku/luci-app-argon-config" "$([[ $REPO_URL == *"lede"* ]] && echo "18.06" || echo "master")"
-UPDATE_PACKAGE "https://github.com/dsadaskwq/luci-theme-kucat.git" "$([[ $REPO_URL == *"lede"* ]] && echo "main" || echo "js")"
+UPDATE_PACKAGE "https://github.com/sirpdboy/luci-theme-kucat.git" "$([[ $REPO_URL == *"lede"* ]] && echo "main" || echo "js")"
 UPDATE_PACKAGE "https://github.com/sirpdboy/luci-app-advancedplus.git" "main"
 UPDATE_PACKAGE "https://github.com/xiaorouji/openwrt-passwall" "main"
 UPDATE_PACKAGE "https://github.com/xiaorouji/openwrt-passwall2" "main"
