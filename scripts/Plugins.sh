@@ -91,8 +91,12 @@ fi
 
 ##根据源码修改 23.05 Home Proxy
 if [[ $REPO_URL == *"immortalwrt/immortalwrt"* ]] ; then
+  #luci-app-homeproxy
   rm -rf ../feeds/luci/applications/luci-app-homeproxy
   git clone --depth=1 --single-branch --branch "dev" https://github.com/immortalwrt/homeproxy.git
+  #ruby3.2.4
+  UPDATE_PACKAGE "https://github.com/immortalwrt/packages" "openwrt-23.05" "./feeds/packages/lang/ruby" "lang/ruby"
+  
 fi
 
 #修改Tiny Filemanager汉化
