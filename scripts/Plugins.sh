@@ -49,6 +49,7 @@ UPDATE_PACKAGE() {
 # git拉取子目录
 UPDATE_PACKAGE "https://github.com/messense/aliyundrive-webdav" "main" "" "openwrt/aliyundrive-webdav"
 UPDATE_PACKAGE "https://github.com/messense/aliyundrive-webdav" "main" "" "openwrt/luci-app-aliyundrive-webdav"
+
 # 正常git clone
 UPDATE_PACKAGE "https://github.com/muink/luci-app-tinyfilemanager" "master"
 UPDATE_PACKAGE "https://github.com/gngpp/luci-theme-design" "$([[ $REPO_URL == *"lede"* ]] && echo "main" || echo "js")"
@@ -68,6 +69,8 @@ UPDATE_PACKAGE "https://github.com/lisaac/luci-app-dockerman.git" "master"
 UPDATE_PACKAGE "https://github.com/sbwml/luci-app-mosdns.git" "v5"
 UPDATE_PACKAGE "https://github.com/gdy666/luci-app-lucky.git" "main"
 UPDATE_PACKAGE "https://github.com/padavanonly/luci-app-mwan3helper-chinaroute.git" "main"
+UPDATE_PACKAGE "https://github.com/tty228/luci-app-wechatpush" "master"
+UPDATE_PACKAGE "https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic" $([[ $REPO_URL == *"lede"* ]] && echo "master" || echo "js")"
 
 ##根据源码修改 21.02  删除/更新 指定路径冲突插件或者核心
 if [[ $REPO_URL == *"immortalwrt-mt798x"* ]] ; then 
