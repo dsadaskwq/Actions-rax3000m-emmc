@@ -1,6 +1,6 @@
 #!/bin/bash
 #删除软件包
-rm -rf $(find ../feeds/luci/ -type d -regex ".*\(luci-app-ssr-plus\|passwall\|aliyundrive-webdav\|openclash\|mosdns\|dockerman\|adguardhome\|alist\).*")
+rm -rf $(find ../feeds/luci/ -type d -regex ".*\(luci-app-ssr-plus\|passwall\|aliyundrive-webdav\|openclash\|mosdns\|dockerman\|adguardhome\|alist\|luci-app-unblockneteasemusic\).*")
 
 #删除冲突核心 packages 
 rm -rf $(find ../feeds/packages/ -type d -regex ".*\(alist\|mosdns\|aliyundrive-webdav\).*")
