@@ -5,7 +5,7 @@ echo "REPO_IP=$REPO_IP" >> $GITHUB_ENV
 sed -i "s/192\.168\.[0-9]*\.[0-9]*/$REPO_IP/g" package/base-files/files/bin/config_generate
 
 #根据源码来修改 openwrt-21.02
-if [[ $REPO_URL == *"immortalwrt-mt798x"* || *"mt798x-immortalwrt"*]] ; then
+if [[ $REPO_URL == *"immortalwrt-mt798x"* || *"mt798x-immortalwrt"* ]] ; then
   #修改默认WIFI名
   if [[ $MODIFY_WIFI == "true" ]] ; then
       #mtwifi-cfg
