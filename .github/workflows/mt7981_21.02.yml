@@ -17,13 +17,14 @@ on:
   workflow_dispatch:
     inputs:
       USE_URL:
-        description: '使用源码 hanwckf/padavanonly'
+        description: '使用源码'
         required: true
-        default: 'padavanonly'
+        default: 'VIKINGYFY/mt798x-immortalwrt'
         type: choice
         options:
-        - hanwckf
-        - padavanonly
+        - hanwckf/immortalwrt-mt798x
+        - padavanonly/immortalwrt-mt798x
+        - VIKINGYFY/mt798x-immortalwrt 
       Default_eeprom:
         description: 'eeprom文件 360t7/nx30pro/off'  #off不使用高功率eeprom
         required: true
