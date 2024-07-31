@@ -74,7 +74,7 @@ UPDATE_PACKAGE "https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemu
 UPDATE_PACKAGE "https://github.com/sirpdboy/netspeedtest" "master"
 
 ##根据源码修改 21.02  删除/更新 指定路径冲突插件或者核心
-if [[ $REPO_URL == *"immortalwrt-mt798x"* || *"mt798x-immortalwrt"*]] ; then 
+if [[ $REPO_URL == *"immortalwrt-mt798x"* || *"mt798x-immortalwrt"* ]] ; then 
   cd ..
   
   #更新golang 
