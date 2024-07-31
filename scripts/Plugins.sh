@@ -79,7 +79,7 @@ if [[ $REPO_URL == *"immortalwrt-mt798x"* || *"mt798x-immortalwrt"* ]] ; then
   
   #更新golang 
   rm -rf feeds/packages/lang/golang
-  git clone https://github.com/sbwml/packages_lang_golang -b 22.x ./feeds/packages/lang/golang
+  git clone https://github.com/sbwml/packages_lang_golang ./feeds/packages/lang/golang
   #更新adblock广告过滤
   #rm -rf feeds/packages/net/adblock
   #rm -rf feeds/luci/applications/luci-app-adblock
