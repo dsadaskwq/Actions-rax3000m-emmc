@@ -123,6 +123,6 @@ if [[ $USE_IPK == "true" ]] ; then
     sed -i 's/services/vpn/g' ./feeds/luci/luci-app-uugamebooster/luasrc/controller/*.lua
     sed -i 's/services/vpn/g' ./feeds/luci/luci-app-uugamebooster/luasrc/view/uugamebooster/*.htm
     #部分插件调整到network 网络
-    #sed -i 's/services/network/g' ./mtk/applications/luci-app-eqos-mtk/root/usr/share/luci/menu.d/luci-app-eqos.json
+    sed -i 's/services/network/g' ./mtk/applications/luci-app-eqos-mtk/root/usr/share/luci/menu.d/luci-app-eqos.json
   
 fi
