@@ -28,6 +28,7 @@ if [[ $REPO_URL == *"immortalwrt-mt798x"* || *"mt798x-immortalwrt"* ]] ; then
   if [[ $USE_CPU_MHZ == "true" ]] ; then
       #sed -i "s/cpu_freq=\"\$(mhz | awk \-F 'cpu_MHz=' '{printf(\"\%.fMHz\",\$2)}')\"/cpu_freq=\"\"/g" package/emortal/autocore/files/generic/cpuinfo
       sed -i 's/cpu_freq=""/cpu_freq="$(mhz | awk -F '\''cpu_MHz='\'' '\''{printf("%.fMHz",$2)}'\'')"/' package/emortal/autocore/files/generic/cpuinfo
+      echo "首页加入cpu频率!"
   fi
 fi
 
