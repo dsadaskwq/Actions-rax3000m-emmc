@@ -53,10 +53,15 @@ on:
         required: true
         default: false
         type: boolean
-      USE_MEMORY_SHRINK:
-        description: 'MTK内存优化 512M推荐关闭'
+      USE_CPU_MHZ:
+        description: '添加 首页CPU频率'
         required: true
-        default: true
+        default: false
+        type: boolean
+      USE_MEMORY_SHRINK:
+        description: 'MTK内存优化 默认关闭'
+        required: true
+        default: false
         type: boolean
       USE_DOCKER:
         description: '添加 docker容器'
@@ -99,7 +104,8 @@ jobs:
 
         echo "USE_MEMORY_SHRINK=${{ github.event.inputs.USE_MEMORY_SHRINK }}" >> $GITHUB_ENV
         echo "USE_IPK=${{ github.event.inputs.USE_IPK }}" >> $GITHUB_ENV
-                
+        echo "USE_CPU_MHZ=${{ github.event.inputs.USE_CPU_MHZ }}" >> $GITHUB_ENV
+        
         chmod +x $FREE_DISK_SH && $FREE_DISK_SH
         sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
         sudo -E apt-get -qq update -y
