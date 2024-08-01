@@ -24,8 +24,11 @@ if [[ $REPO_URL == *"immortalwrt-mt798x"* || *"mt798x-immortalwrt"* ]] ; then
       sed -i '/CONFIG_MTK_MEMORY_SHRINK/d' $AX3000_CONFIG
       sed -i '/CONFIG_MTK_MEMORY_SHRINK/d' $MTWIFI_CONFIG
   fi
-  #去除首页cpu频率加快首页加载
-  #sed -i "s/cpu_freq=\"\$(mhz | awk \-F 'cpu_MHz=' '{printf(\"\%.fMHz\",\$2)}')\"/cpu_freq=\"\"/g" package/emortal/autocore/files/generic/cpuinfo
+  #加入首页cpu频率 会减慢首页加载
+  if [[ $USE_CPU_MHZ == "true" ]] ; then
+      #sed -i "s/cpu_freq=\"\$(mhz | awk \-F 'cpu_MHz=' '{printf(\"\%.fMHz\",\$2)}')\"/cpu_freq=\"\"/g" package/emortal/autocore/files/generic/cpuinfo
+      sed -i 's/cpu_freq=""/cpu_freq="$(mhz | awk -F '\''cpu_MHz='\'' '\''{printf("%.fMHz",$2)}'\'')"/' package/emortal/autocore/files/generic/cpuinfo
+  fi
 fi
 
 #根据源码来修改 openwrt-23.05
