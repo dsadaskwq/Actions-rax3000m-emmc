@@ -3,7 +3,7 @@
 rm -rf $(find ../feeds/luci/ -type d -regex ".*\(luci-app-ssr-plus\|passwall\|aliyundrive-webdav\|openclash\|mosdns\|dockerman\|adguardhome\|alist\|luci-app-unblockneteasemusic\).*")
 
 #删除冲突核心 packages 
-rm -rf $(find ../feeds/packages/ -type d -regex ".*\(alist\|mosdns\|aliyundrive-webdav\).*")
+rm -rf $(find ../feeds/packages/ -type d -regex ".*\(alist\|mosdns\|chinadns-ng\|v2ray-geodata\|aliyundrive-webdav\).*")
 
 ##git仓库  "$4"可拉仓库子目录
 CURRENT_PATH=$(pwd)
@@ -61,7 +61,7 @@ UPDATE_PACKAGE "https://github.com/VIKINGYFY/luci-app-advancedplus.git" "main"
 UPDATE_PACKAGE "https://github.com/xiaorouji/openwrt-passwall" "main"
 UPDATE_PACKAGE "https://github.com/xiaorouji/openwrt-passwall2" "main"
 UPDATE_PACKAGE "https://github.com/xiaorouji/openwrt-passwall-packages" "main"
-UPDATE_PACKAGE "https://github.com/fw876/helloworld" "master"
+#UPDATE_PACKAGE "https://github.com/fw876/helloworld" "master"
 UPDATE_PACKAGE "https://github.com/vernesong/OpenClash" "master"
 UPDATE_PACKAGE "https://github.com/sbwml/luci-app-alist.git" "master"
 UPDATE_PACKAGE "https://github.com/chenmozhijin/luci-app-adguardhome.git" "master"
