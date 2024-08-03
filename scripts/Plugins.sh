@@ -3,7 +3,7 @@
 rm -rf $(find ../feeds/luci/ -type d -regex ".*\(luci-app-ssr-plus\|passwall\|aliyundrive-webdav\|openclash\|mosdns\|dockerman\|adguardhome\|alist\|luci-app-unblockneteasemusic\).*")
 
 #删除冲突核心 packages 
-rm -rf $(find ../feeds/packages/ -type d -regex ".*\(alist\|mosdns\|chinadns-ng\|v2ray-geodata\|aliyundrive-webdav\).*")
+rm -rf $(find ../feeds/packages/ -type d -regex ".*\(alist\|mosdns\|xray-core\|v2ray-core\|chinadns-ng\|sing-box\|v2ray-geodata\|aliyundrive-webdav\).*")
 
 ##git仓库  "$4"可拉仓库子目录
 CURRENT_PATH=$(pwd)
