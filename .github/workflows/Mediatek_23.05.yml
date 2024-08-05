@@ -73,7 +73,6 @@ jobs:
         sudo -E apt-get -qq update -y
         sudo -E apt-get -qq full-upgrade -y
         chmod +x $ENV_SH && $ENV_SH
-        sudo -E apt -yqq install ack antlr3 autopoint ccache genisoimage libyaml-dev
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
@@ -99,8 +98,7 @@ jobs:
       run: |
         cd openwrt
         ./scripts/feeds update -a && ./scripts/feeds install -a        
-        #chmod +x $GITHUB_WORKSPACE/$DIY_SH && $GITHUB_WORKSPACE/$DIY_SH
-        $GITHUB_WORKSPACE/$DIY_SH
+        chmod +x $GITHUB_WORKSPACE/$DIY_SH && $GITHUB_WORKSPACE/$DIY_SH
         cd package
         chmod +x $GITHUB_WORKSPACE/$PLUGINS_SH && $GITHUB_WORKSPACE/$PLUGINS_SH
 
